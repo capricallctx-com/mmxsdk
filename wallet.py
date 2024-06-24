@@ -1,5 +1,4 @@
 import json
-
 import loguru
 import requests
 import context
@@ -38,7 +37,7 @@ def mint(hsid: str, index: int = context.default_wallet):
     return response.text
 
 
-def send(hsid: str, token_id: str, amount: float, destination: str, index: int = context.default_wallet):
+def send(hsid: str, token_id: str, amount: float, destination: str, index: int = context.default_wallet, memo: str = ""):
     url = f"{context.base_url}/wapi/wallet/send"
     payload = {
         "index": index,
@@ -46,7 +45,7 @@ def send(hsid: str, token_id: str, amount: float, destination: str, index: int =
         "currency": token_id,
         "dst_addr": destination,
         "options": {
-            "memo": "test test",
+            "memo": memo,
             "fee_ratio": 1024,
             "passphrase": None
         }
@@ -72,14 +71,14 @@ def deploy(hsid: str, contract_json: str, index: int = context.default_wallet):
     return response.text
 
 
-def offer(hsid: str, ask_token_id: str, ask_amount: float, bid_token_id: str, bid_rate: float,
+def offer(hsid: str, ask_token_id: str, ask_amount: float, selling_token_id: str, selling_amount: float,
           index: int = context.default_wallet):
     url = f"{context.base_url}/wapi/wallet/offer"
     payload = {
         "index": index,
-        "bid": bid_rate,
+        "bid": selling_amount,
         "ask": ask_amount,
-        "bid_currency": bid_token_id,
+        "bid_currency": selling_token_id,
         "ask_currency": ask_token_id
     }
 

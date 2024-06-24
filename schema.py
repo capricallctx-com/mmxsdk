@@ -3,6 +3,31 @@
 import json
 
 
+options_sample = {
+    "memo": "clippy is the ultimate hazard",
+    "fee_ratio": 1024,
+    "passphrase": None
+}
+
+
+class TransactionOptions:
+    """
+    This class represents the options object for a transaction
+    """
+
+    def __init__(self, json_str=None):
+        self.__type = 'vnx.addons.OptionsSample'
+        self.memo = ''
+        self.fee_ratio = 0
+        self.passphrase = None
+
+        if json_str:
+            self.__dict__ = json.loads(json_str)
+
+    def to_json(self):
+        return json.dumps(self.__dict__)
+
+
 class MMXSession:
     """
     This class represents a session object for the MMX server
