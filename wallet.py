@@ -1,3 +1,4 @@
+import io
 import json
 import loguru
 import requests
@@ -64,7 +65,8 @@ def deploy(hsid: str, contract_json: str, index: int = context.default_wallet):
     s = requests.Session()
     cookies = {'hsid': hsid}
     print(contract_json)
-    response = s.post(url, cookies=cookies, headers=context.headers, data=contract_json)
+    contract_file = io.StringIO(contract_json)
+    response = s.post(url, cookies=cookies, headers=context.headers, data=contract_file)
     if response.status_code != 200:
         loguru.logger.error(f"Failed to POST {url}: {response.status_code}, {response.text}")
         return None
@@ -120,4 +122,24 @@ def accept_offer(hsid: str, offer_id: str, options: str,
     response = s.post(url, cookies=cookies, headers=context.headers, json=payload)
     if response.status_code != 200:
         loguru.logger.error(f"Failed to POST {url}: {response.status_code}, {response.text}")
+    return response.text
+
+def keys(hsid: str, index: int = context.default_wallet):
+    url = f"{context.base_url}/wapi/wallet/keys?index={index}"
+    s = requests.Session()
+    cookies = {'hsid': hsid}
+    response = s.get(url, cookies=cookies, headers=context.headers)
+    if response.status_code != 200:
+        loguru.logger.error(f"Failed to get {url}: {response.status_code}, {response.text}")
+        return None
+    return response.text
+
+def seed(hsid: str, index: int = context.default_wallet):
+    url = f"{context.base_url}/wapi/wallet/seed?index={index}"
+    s = requests.Session()
+    cookies = {'hsid': hsid}
+    response = s.get(url, cookies=cookies, headers=context.headers)
+    if response.status_code != 200:
+        loguru.logger.error(f"Failed to get {url}: {response.status_code}, {response.text}")
+        return None
     return response.text

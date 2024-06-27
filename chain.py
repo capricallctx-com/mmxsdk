@@ -97,3 +97,32 @@ def farmers(hsid: str, since_unix: int = 0, limit=200):
     if response.status_code != 200:
         loguru.logger.error(f"Failed to GET {url}: {response.status_code}, {response.text}")
     return json.loads(response.text)
+
+def address(hsid: str, id: str):
+    url = f"{context.base_url}/wapi/address?id={id}"
+    s = requests.Session()
+    cookies = {'hsid': hsid}
+    response = s.get(url, cookies=cookies, headers=context.headers)
+    if response.status_code != 200:
+        loguru.logger.error(f"Failed to GET {url}: {response.status_code}, {response.text}")
+    return json.loads(response.text)
+
+def balance(hsid: str, id: str):
+    url = f"{context.base_url}/wapi/balance?id={id}"
+    s = requests.Session()
+    cookies = {'hsid': hsid}
+    response = s.get(url, cookies=cookies, headers=context.headers)
+    if response.status_code != 200:
+        loguru.logger.error(f"Failed to GET {url}: {response.status_code}, {response.text}")
+    return json.loads(response.text)
+
+
+def contract(hsid: str, id: str):
+    url = f"{context.base_url}/wapi/contract?id={id}"
+    s = requests.Session()
+    cookies = {'hsid': hsid}
+    response = s.get(url, cookies=cookies, headers=context.headers)
+    if response.status_code != 200:
+        loguru.logger.error(f"Failed to GET {url}: {response.status_code}, {response.text}")
+    return json.loads(response.text)
+

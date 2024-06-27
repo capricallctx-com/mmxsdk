@@ -49,3 +49,23 @@ def info(hsid: str, mmx_id: str):
         return None
     print(response.text)
     return response.text
+
+def user_info(hsid: str, user_id: str, swap_id: str):
+    """
+    get detailed information about a user's position in a swap pool
+    :param hsid:
+    :param user_id:
+    :param swap_id:
+    :return:
+    """
+    s = requests.Session()
+    cookies = {'hsid': hsid}
+    headers = {'Host': 'localhost:11380', 'User-Agent': 'Leozilla',}
+    url = f"{context.base_url}/wapi/swap/user_info?id={swap_id}&user={user_id}"
+    response = s.get(url, cookies=cookies, headers=headers)
+
+    if response.status_code != 200:
+        loguru.logger.error(f"Failed to get {url}: {response.status_code}, {response.text}")
+        return None
+    return json.loads(response.text)
+
