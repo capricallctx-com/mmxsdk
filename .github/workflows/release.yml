@@ -21,7 +21,7 @@ jobs:
           echo "::set-output name=release_tag::UserBuild_$(date +"%Y.%m.%d_%H-%M")"
       - name: Install dependencies
         run: |
-          tar -czf ${{ steps.tag.outputs.release_tag }}.tar.gz --exclude='*.tar.gz' .
+          zip -r ${{ steps.tag.outputs.release_tag }}.zip .
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
@@ -44,6 +44,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./${{ steps.tag.outputs.release_tag }}.tar.gz
-          asset_name: ${{ steps.tag.outputs.release_tag }}.tar.gz
+          asset_path: ./${{ steps.tag.outputs.release_tag }}.zip
+          asset_name: ${{ steps.tag.outputs.release_tag }}.zip
           asset_content_type: application/zip
