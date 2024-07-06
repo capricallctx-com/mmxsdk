@@ -21,7 +21,7 @@ jobs:
           echo "::set-output name=release_tag::UserBuild_$(date +"%Y.%m.%d_%H-%M")"
       - name: Install dependencies
         run: |
-          tar -czf ${{ steps.tag.outputs.release_tag }}.tar.gz .
+          tar -czf ${{ steps.tag.outputs.release_tag }}.tar.gz --exclude='*.tar.gz' .
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
