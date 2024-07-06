@@ -6,6 +6,7 @@ import requests
 import context
 import loguru
 from schema import MMXSession
+from context import headers
 
 """
 # uncomment this to enable debugging of the HTTP requests
@@ -36,7 +37,6 @@ def login(username='mmx-admin', password=os.getenv("PASSWORD")):
     """
     s = requests.Session()
     cookies = {'hsid': None}
-    headers = {'Host': 'localhost:11380', 'User-Agent': 'Leozilla', }
     url = f"{context.base_url}/server/login?user={username}&passwd_plain={password}"
     response = s.get(url, cookies=cookies, headers=headers)
     if response.status_code != 200:

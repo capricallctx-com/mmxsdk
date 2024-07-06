@@ -2,14 +2,16 @@
 var creator;
 var mint_height;
 var CID;
+var max_supply;
 
-function init(creator_, CID_)
+function init(creator_, CID_, max_supply_)
 {
 	if(read("decimals") != 0) {
 		fail("decimals not zero");
 	}
 	creator = bech32(creator_);
 	CID = CID_;
+	max_supply = max_supply_;
 }
 
 function mint_to(address) public

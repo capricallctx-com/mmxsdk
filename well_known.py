@@ -1,3 +1,11 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2023-2024, Caprica LLC
+
+# This is a list of well-known contract token addresses
+# don't take this as the 'good' list of tokens - it's always possible
+# someone has taken the token over or taken control of this repo
+# verify against the UI or mmxexplorer
+
 tn12_mmx = "mmx1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqdgytev"
 tn12_moose = "mmx14eajwmak3rnww00cjk4hxj0uadzdyz07n4ldrrw3lnmfvlg9mprs504fn0"
 tn12_catgirl = "mmx1h7d2gyrpuqxn4afrp75egaqcy99csjur3wfkp2w09cqpuqu4vf7qw386d7"

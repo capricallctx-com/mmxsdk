@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: MIT
-# Copyright (c) 2023, Caprica LLC
+# Copyright (c) 2023-2024, Caprica LLC
 import json
 import loguru
 import requests
